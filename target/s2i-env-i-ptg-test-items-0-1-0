@@ -1,0 +1,2 @@
+ARTIFACT_COPY_ARGS=*.war
+JAVA_APP_DIR=/deployments

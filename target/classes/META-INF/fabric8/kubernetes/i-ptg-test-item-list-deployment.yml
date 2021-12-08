@@ -1,0 +1,63 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    fabric8.io/git-commit: d6d781332bdef8955a26844dbe9f506ada4a9e3e
+    fabric8.io/iconUrl: img/icons/camel.svg
+    fabric8.io/git-branch: main
+    fabric8.io/metrics-path: dashboard/file/camel-routes.json/?var-project=i-ptg-test-item-list&var-version=0.1.0
+  labels:
+    app: i-ptg-test-item-list
+    provider: fabric8
+    version: 0.1.0
+    group: com.redhat
+  name: i-ptg-test-item-list
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: i-ptg-test-item-list
+      provider: fabric8
+      group: com.redhat
+  template:
+    metadata:
+      annotations:
+        fabric8.io/git-commit: d6d781332bdef8955a26844dbe9f506ada4a9e3e
+        fabric8.io/iconUrl: img/icons/camel.svg
+        fabric8.io/git-branch: main
+        fabric8.io/metrics-path: dashboard/file/camel-routes.json/?var-project=i-ptg-test-item-list&var-version=0.1.0
+      labels:
+        app: i-ptg-test-item-list
+        provider: fabric8
+        version: 0.1.0
+        group: com.redhat
+    spec:
+      containers:
+      - env:
+        - name: SPRING_APPLICATION_JSON
+          value: '{"server":{"tomcat":{"max-threads":1}}}'
+        - name: JAVA_APP_JAR
+          value: i-ptg-test-item-list-0.1.0.jar
+        - name: KUBERNETES_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: i-ptg-test-item-list:0.1.0
+        imagePullPolicy: IfNotPresent
+        name: i-ptg-test-item-list
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        - containerPort: 8081
+          name: sunproxyadmin
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "1.0"
+          requests:
+            cpu: "0.2"
+        securityContext:
+          privileged: false

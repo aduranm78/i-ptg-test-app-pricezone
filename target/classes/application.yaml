@@ -1,0 +1,23 @@
+
+camel:
+  springboot:
+    name: i-disa-proxy
+    main-run-controller: true
+
+server:
+  address: 0.0.0.0
+  port: 8090 #! ver restConfiguration
+management:
+  address: 0.0.0.0
+  port: 8091
+
+endpoints:
+  enabled: false
+  health:
+    enabled: true
+
+redhat:
+  backend: ${MY_BACKEND_URL}
+
+logging:
+  file: /deployments/data/drt-energiko.log
